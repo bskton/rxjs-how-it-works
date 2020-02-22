@@ -4,8 +4,8 @@ The starter project for RxJS tutorial.
 
 ## Requirements
 
-Node.js 13.8.0+
-Yarn 1.21.1+
+ * Node.js 13.8.0+
+ * Yarn 1.21.1+
 
 ## Usage
 
