@@ -6,6 +6,10 @@ class Observable {
     subscribe(observer) {
         return this.subscriptionFunction(observer);
     }
+
+    pipe(...operators) {
+        return operators.reduce((source, operator) => operator(source), this);
+    }
 }
 
 function timer(seconds) {
@@ -20,8 +24,21 @@ function timer(seconds) {
     return new Observable(subscriptionFunction);
 }
 
+function logToConsole() {
+    return source => new Observable(observer => {
+        return source.subscribe({
+            next(value) {
+                console.log('logToConsole', value);
+                observer.next(value);
+            }
+        })
+    })
+}
+
 const myOvenTimer = timer(3);
 
-myOvenTimer.subscribe({
-    next: value => console.log(value)
-});
+myOvenTimer
+    .pipe(logToConsole())
+    .subscribe({
+        next: value => console.log(value)
+    });
