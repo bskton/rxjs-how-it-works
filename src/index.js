@@ -27,9 +27,9 @@ function timer(seconds) {
 function logToConsole() {
     return source => new Observable(observer => {
         return source.subscribe({
-            next(value) {
+            next: value => {
                 console.log('logToConsole', value);
-                observer.next(value);
+                observer.next(value + '!!');
             }
         })
     })
